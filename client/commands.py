@@ -70,3 +70,14 @@ def commands(text, sendMessage, clear):
       print('Your username is now: ' + g.username)
     else:
       print('Please enter a new username')
+  
+  if(command == 'help'):
+    print('\n')
+    print('/nf - Enable/disable notifications')
+    print('/cls - Clear the screen')
+    print('/print - Print the clipboard')
+    print('/color - Color commands')
+    print('/changeName <name> - Change your username')
+    print('/clear - Clear the messages history')
+    print('/help - Show this help menu')
+    print('\n')
