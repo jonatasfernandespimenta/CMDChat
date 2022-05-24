@@ -1,1 +1,2 @@
 notify = False
+username = ''

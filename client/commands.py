@@ -40,7 +40,7 @@ def printscreen(sendMessage):
   with open("ascii_image.txt", "w") as f:
     f.write(ascii_image)
 
-def commands(text, sendMessage):
+def commands(text, sendMessage, clear):
   command = text.replace("/", "")
   if(command == 'nf'):
       if(g.notify == False):
@@ -59,3 +59,14 @@ def commands(text, sendMessage):
       color = text.split(' ')[1]
       setColor(color)
     setColor(text)
+
+  if(command == 'clear'):
+    clear()
+
+  if('changeName' in command):
+    if(' ' in text):
+      newName = text.split(' ')[1]
+      g.username = newName
+      print('Your username is now: ' + g.username)
+    else:
+      print('Please enter a new username')

@@ -10,13 +10,19 @@ const io = require('socket.io')(server, {
   }
 });
 
-const messages = [];
+let messages = [];
 
 io.on("connection", (socket) => {
-  io.emit("someone connected");
+  socket.on('join', (args) => {
+    io.emit('entered', args + ' joined the chat');
+  });
 
   socket.on('exit', (args) => {
-    io.emit(args.user + ' has left');
+    io.emit('left', args + ' left the chat');
+  });
+
+  socket.on('clear', () => {
+    messages = [];
   });
 
   socket.emit('enter', messages);
