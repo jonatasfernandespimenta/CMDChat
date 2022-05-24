@@ -3,10 +3,24 @@ import json
 import utils.globals as g
 from commands import commands
 import time
+from os.path import exists
 
 sio = socketio.Client()
-server = input('Insert the server IP: ')
-port = input('Insert the server port: ')
+
+if(exists('server.txt')):
+    with open('server.txt', 'r') as f:
+        connection = f.read()
+else:
+    server = input('Insert the server IP: ')
+    port = input('Insert the server port: ')
+
+    connection = server + ':' + port
+
+    save = input('Do you want to save the server IP and port? (y/n): ')
+    if(save == 'y'):
+        with open('server.txt', 'w') as f:
+            f.write(server + ':' + port)
+
 
 g.username = input("Enter your username: ")
 
@@ -52,7 +66,7 @@ def send_message(message):
     sio.emit('message', json.dumps({'message': message, 'user': g.username}))
 
 
-sio.connect('http://' + server + ':' + port)
+sio.connect('http://' + connection)
 sio.sleep(2)
 
 join()
